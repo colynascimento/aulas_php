@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
     <body>
 
@@ -11,7 +12,7 @@
             <h1>Calculadora: Operadores Aritméticos</h1>
         </header>
 
-        <main>
+        <main class="container-principal">
             <?php
                 if (isset($_POST['numero1']) && isset($_POST['numero2']) && isset($_POST['operacao'])) {
                     $numero1 = (int) htmlspecialchars($_POST['numero1']);
@@ -39,7 +40,7 @@
             ?>
             
             <br>
-            <a href="index.html">Fazer outro cálculo</a>
+            <a href=".">Fazer outro cálculo</a>
         </main>
 
     </body>

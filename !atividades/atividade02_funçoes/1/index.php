@@ -20,5 +20,24 @@ Desenvolva um programa em PHP que exiba a tabuada completa de 1 a 10.
             <h1> Tabela da Tabuada</h1>
         </header>
 
+        <main>
+            <form method="POST">
+                <label for="numero">Insira um número:</label>
+                <input type="number" id="numero" name="numero" required>
+                <div><button type="submit" name="calcular">Calcular</button></div>
+            </form>
+
+            <section>
+                <?php
+                    include "public/processa.php";
+
+                    $numero = $_POST['numero'] ?? null;
+
+                    if ($numero !== null) {
+                        exibirResultado($numero);
+                    };
+                ?>
+            </section>
+        </main>
     </body>
 </html>

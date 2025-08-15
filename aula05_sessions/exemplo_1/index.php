@@ -29,7 +29,7 @@
         // Verifica se já existe um nome armazenado na sessão
             if(isset($_SESSION['nome'])) {
                 // Exibe uma mensagem com o nome armazenado
-                echo "<p>Olá, " $_SESSION['nome'] . "! Seja bem-vindo de volta.<p>";
+                echo "<p>Olá, " . $_SESSION['nome'] . "! Seja bem-vindo de volta.<p>";
             }
         ?>
     </body>

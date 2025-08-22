@@ -16,13 +16,13 @@
     // Se o formulário for enviado para adicionar aluno
     if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['limpar'])) {
         // Cria um novo aluno a partir dos dados enviados
-        $novo_aluno = {
+        $novo_aluno = [
             'nome' => $_POST['nome'],
             'Nota1' => (float) $_POST['nota1'],
             'Nota2' => (float) $_POST['nota2'],
             'Nota3' => (float) $_POST['nota3'],
             'Nota4' => (float) $_POST['nota4']
-        };
+        ];
 
         // Adiciona à lista na sessão
         $_SESSION['alunos'][] = $novo_aluno;
@@ -45,7 +45,6 @@
 
         <form method='POST'>
             <label>Nome do Aluno</label><br>
-
             <input type='text' name='nome' required><br>
 
             <label>Nota 1:</label><br>
@@ -85,7 +84,7 @@
                     $media = $soma / 4;
                 ?>
                 <li><strong>Soma:</strong> <?= $soma ?></li>
-                <li><strong>Média:</strong> <?= number_format($media, 2 ',', '.') ?></li>
+                <li><strong>Média:</strong> <?= number_format($media, 2, ',', '.') ?></li>
             </ul>
             <hr>
         <?php endforeach; ?>

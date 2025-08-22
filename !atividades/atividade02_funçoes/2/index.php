@@ -8,6 +8,29 @@ Crie um programa que leia o nome de um aluno e quatro notas.
     individual de cada um.
  -->
 
+ <?php
+    include "public/process.php";
+
+    session_start();
+
+    if (!isset($_SESSION['alunos']) || !is_array($_SESSION['alunos'])) {
+        $_SESSION['alunos'] = [];  
+    }  
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $media = calcularMedia($_POST['nota1'], $_POST['nota2'], $_POST['nota3'], $_POST['nota4']);
+        $situacao = situacaoAluno($media);
+
+        $novo_aluno = [
+            'nome' => $_POST['nome'],
+            'media' => number_format($media, 2, ',', '.'),
+            'situacao' => $situacao
+        ];
+
+        $_SESSION['alunos'][] = $novo_aluno;
+    }
+?>
+
  <!DOCTYPE html>
  <html lang="pt-br">
     <head>
@@ -40,34 +63,38 @@ Crie um programa que leia o nome de um aluno e quatro notas.
                     <label for="nota4">4º Bimestre:</label>
                     <input type="number" name="nota4" id="nota4" required>
 
-                    <div><button type="submit" name="inserir">Inserir Aluno</button></div>
+                    <div><input type="submit" value="Inserir Aluno" name='inserir'></div>
                 </form>
             </section>
 
             <section>
                 <table>
                     <thead>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Média</th>
-                        <th scope="col">Situação</th>
+                        <tr>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Média</th>
+                            <th scope="col">Situação</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr name="mensagem-vazia">
-                            <td>Não há alunos cadastrados</td>
-                        </tr>
+                        <?php if (empty($_SESSION['alunos'])): ?>
+                            <tr>
+                                <td colspan="3">Não há alunos cadastrados</td>
+                            </tr>
 
-                        <?php
-                            include "public/process.php";
-
-                            if (isset($_POST['inserir'])) {
-
-                            }
-                        ?>
+                        <?php else: ?>
+                            <?php foreach ($_SESSION['alunos'] as $aluno): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($aluno['nome']) ?></td>
+                                    <td><?= htmlspecialchars($aluno['media']) ?></td>
+                                    <td><?= htmlspecialchars($aluno['situacao']) ?></td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
                     </tbody>
                 </table>
             </section>
         </main>
 
-        <script src="public/js/script.js"></script>
     </body>
  </html>

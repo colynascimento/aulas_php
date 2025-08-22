@@ -5,6 +5,17 @@ Desenvolva um programa que conte quantas vogais existem em uma frase digitada pe
     - Use laços de repetição para percorrer a string.
     - Exiba ao final quantas vezes cada vogal aparece.
 -->
+<?php
+    include 'public/process.php';
+
+    session_start();
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $array_input = str_split($_POST['frase']);
+
+        print_r($array_input);
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -19,6 +30,24 @@ Desenvolva um programa que conte quantas vogais existem em uma frase digitada pe
     <header>
         <h1>Contador de Vogais</h1>
     </header>
+
+    <main>
+        <section>
+            <form method='POST'>
+                <label for='frase'>Digite uma frase:</label>
+                <input type='text' name='frase' id='frase' required>
+
+                <div><input type="submit" value="Enviar" name='enviar'></div>
+            </form>
+        </section>
+
+        <section id='resultado-contador'>
+
+        </section>
+    </main>
     
     </body>
 </html>
+
+- posso transformar a frase em um array, sendo cada caracter um elemento
+- e percorrer o array que incrementa contador
